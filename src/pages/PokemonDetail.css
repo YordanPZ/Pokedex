@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+#root {
+    --yellow: #f5db13;
+    --green-light: #73d677;
+    --green-dark: #53af62;
+    --red:#c5312a;
+}
+.main{
+    padding: 2rem 10rem;
+}
+.main h4{
+    font-size: 1.5rem;
+    text-decoration: underline rgba(0, 0, 0, 0.162) 2px;
+
+}
+.redirect{
+    position: absolute;
+    right: 4rem;
+    top: 1.3rem;
+}
+.redirect img{
+    height: 3.5rem;
+    transition: all 0.5s;
+}
+.title{
+    font-size: 4rem;
+    text-transform: capitalize;
+    letter-spacing: 6px;
+    font-weight: 900;
+}
+.redirect img:hover{
+    transform: scale(1.2) rotate(360deg);
+}
+.main__container{
+    display: flex;
+    padding: 4rem 4rem;
+    border-radius: 50px;
+    margin-top: 1rem;
+}
+.main__container__info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    min-width: 30%;
+    border: 1px solid white;
+    border-radius: 50px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.24);
+    font-weight: 700;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;   
+}
+.main__container__img{
+    width: 60%;
+    display: flex;
+    align-items: center;
+    padding-left: 4rem;
+    filter: drop-shadow(10px 10px 10px white);
+}
+.main__container__img img{
+    height: 110%;
+    filter: drop-shadow(0px 20px 1px black);
+}
+.main__container__types{
+    padding: 0.6rem;
+    background-color: white;
+    margin: 10px;
+    border-radius: 10px;
+}
+.main__container__types__img{
+    display: flex;
+    gap: 1rem;
+}
+.main__container__stats{
+    display: flex ;
+    gap: 1rem;
+}
+.main__container__abilities{
+    display: flex;
+    gap: 1rem;
+}
+.main__container__stats__color{
+    border: 1px solid rgb(255, 255, 255);
+    padding: 0.6rem;
+    margin: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.223);
+}
+.main__container__abilities--inner{
+    color: white;
+    border: 1px solid rgb(255, 255, 255);
+    padding: 0.6rem;
+    margin: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.223);
+}
+.drop{
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.223);
+    border: 1px solid white;
+}
+.evolution__img{
+    height: 8rem;
+}
+.main__container__evolutions{
+    padding: 20px;
+    display: flex;
+    gap: 3rem;
+
+}

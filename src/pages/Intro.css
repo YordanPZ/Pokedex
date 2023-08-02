@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+#root {
+    --yellow: #f5db13;
+    --green-light: #73d677;
+    --green-dark: #53af62;
+}
+.header__nav {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.347);
+    box-shadow: 1px 1px 14px;
+    background-color: var(--yellow);
+}
+.header__nav-logo {
+    height: 100px;
+    cursor: pointer;
+}
+.main__intro {
+    background-color: var(--yellow);
+    min-height: calc(100vh  - 101px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.section__intro {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 5%;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    min-height: 100%;
+    align-self: center;
+}
+.section__intro-title {
+    font-size: 5rem;
+}
+.container {
+    position: relative;
+    background: linear-gradient(135deg,rgb(94, 175, 98)  0%,  rgb(115, 214, 119) 100%);
+    border-radius: 1000px;
+    padding: 10px;
+    display: grid;
+    place-content: center;
+    z-index: 0;
+    max-width: 300px;
+    margin: 0 10px;
+}
+.search-container {
+    position: relative;
+    width: 100%;
+    border-radius: 50px;
+    background-color: var(--green-light);
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.search-container::after,
+.search-container::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    position: absolute;
+}
+
+.search-container::before {
+    top: -1px;
+    left: -1px;
+    background-color: var(--green-light);
+    z-index: -1;
+}
+
+.search-container::after {
+    bottom: -1px;
+    right: -1px;
+    background-color: var(--green-light);
+    box-shadow: var(--green-light) 3px 3px 5px 0px, var(--green-dark) 5px 5px 20px 0px;
+    z-index: -2;
+}
+
+.input {
+    padding: 10px;
+    width: 100%;
+    background-color: var(--green-light);
+    border: none;
+    color: #000000;
+    font-size: 20px;
+    border-radius: 50px;
+}
+
+.input:focus {
+    outline: none;
+    background-color: var(--green-dark);
+    background: linear-gradient(135deg, rgb(115, 214, 119) 0%, rgb(94, 175, 98) 100%);
+}
+
+.search__icon {
+    width: 50px;
+    aspect-ratio: 1;
+    border-left: 2px solid white;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-radius: 50%;
+    padding-left: 12px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.search__icon:hover {
+    border-left: 3px solid white;
+}
+.main__logos-pikachu{
+    position: absolute;
+    height: 40rem;
+    inset: 0;
+    margin: 7% 45% auto auto;
+    z-index: 2;
+}
+.main__logos-pokeball{
+    position: absolute;
+    right: 20%;
+    top: 30%;
+    height: 25rem;
+    z-index: 3;
+}
+.main__logos-cloud{
+    position: absolute;
+    right: 27%;
+    top: 12%;
+    height: 15rem;
+    z-index: 1;
+}
+.main__logos-cloud2{
+    position: absolute;
+    left: 15%;
+    top: 48%;
+    height: 10rem;
+    z-index: 1;
+}
+.main__logos-pokeball1{
+    position: absolute;
+    left: 22%;
+    top:18%;
+    height: 10rem;
+    z-index: 1;
+}
+

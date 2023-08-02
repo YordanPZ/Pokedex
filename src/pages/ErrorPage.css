@@ -1,0 +1,42 @@
+.error-page{
+    background-color: #D93E30;
+    min-width: 100vw;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    display: grid;
+    place-content: center;
+}
+.btn-regresar{
+    position: fixed;
+    z-index: 2;
+    bottom: 5%;
+    left: 45%;
+    width: fit-content;
+    height: fit-content;
+    background-color: rgb(190, 168, 44);
+    color: white;
+    color: black;
+}
+.btn-regresar:hover {
+    color: white;
+    box-shadow: inset 0 -100px 0 0 #000000;
+}
+
+.btn-regresar:active {
+    transform: scale(0.9);
+}
+.btn-regresar {
+    margin: 15px;
+    padding: 15px 30px;
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    background: transparent;
+    cursor: pointer;
+    transition: ease-out 0.5s;
+    border: 2px solid #d7e41d;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 0 #000000;
+}

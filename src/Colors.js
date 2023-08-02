@@ -1,0 +1,72 @@
+//colores de los pokemones segun su tipo
+const colors = {
+    normal: 'linear-gradient(135deg,rgb(145, 154, 162) 100%, rgb(145, 154, 162) 50%',
+    fire: 'linear-gradient(135deg,rgb(255, 157, 85) 100%, rgb(255, 157, 85) 50%',
+    water: 'linear-gradient(135deg,rgb(80, 144, 210) 100%, rgb(80, 144, 210) 50%',
+    electric: 'linear-gradient(135deg,rgb(244, 210, 60) 100%, rgb(244, 210, 60) 50%)',
+    grass: 'linear-gradient(135deg,rgb(99, 188, 90) 100%, rgb(99, 188, 90) 50%)',
+    ice: 'linear-gradient(135deg,rgb(115, 206, 192) 100%, rgb(115, 206, 192) 50%)',
+    fighting: 'linear-gradient(135deg,rgb(206, 65, 107) 100%, rgb(206, 65, 107) 50%)',
+    poison: 'linear-gradient(135deg,rgb(181, 103, 206 ) 100%, rgb(181, 103, 206 ) 50%)',
+    ground: 'linear-gradient(135deg,rgb(217, 120, 69) 100%, rgb(217, 120, 69) 50%)',
+    flying: 'linear-gradient(135deg,rgb(137, 170, 227) 100%, rgb(137, 170, 227) 50%)',
+    psychic: 'linear-gradient(135deg,rgb(250, 113, 121) 100%, rgb(250, 113, 121) 50%)',
+    bug: 'linear-gradient(135deg,rgb(145, 193, 47) 100%, rgb(145, 193, 47) 50%)',
+    rock: 'linear-gradient(135deg,rgb(197, 183, 140) 100%, rgb(197, 183, 140) 50%)',
+    ghost: 'linear-gradient(135deg,rgb(82, 105, 173) 100%, rgb(82, 105, 173) 50%)',
+    dragon: 'linear-gradient(135deg,rgb(11, 109, 195) 100%, rgb(11, 109, 195) 50%)',
+    dark: 'linear-gradient(135deg,rgb(90, 84, 101) 100%, rgb(90, 84, 101) 50%)',
+    steel: 'linear-gradient(135deg,rgb(90, 142, 162) 100%, rgb(90, 142, 162) 50%)',
+    fairy: 'linear-gradient(135deg,rgb(236, 143, 230) 100%, rgb(236, 143, 230) 50%)',
+    unknown: 'linear-gradient(135deg,rgb(0, 0, 0) 100%, rgb(0, 0, 0) 50%)',
+    shadow: 'linear-gradient(135deg,rgb(0, 0, 0) 100%, rgb(0, 0, 0) 50%)',
+  };
+  
+  export default colors;
+
+  export const rutas = [
+    "/IconsPokemons/bug.svg",
+    "/IconsPokemons/dark.svg",
+    "/IconsPokemons/dragon.svg",
+    "/IconsPokemons/electric.svg",
+    "/IconsPokemons/fairy.svg",
+    "/IconsPokemons/fighting.svg",
+    "/IconsPokemons/fire.svg",
+    "/IconsPokemons/flying.svg",
+    "/IconsPokemons/ghost.svg",
+    "/IconsPokemons/grass.svg",
+    "/IconsPokemons/ground.svg",
+    "/IconsPokemons/ice.svg",
+    "/IconsPokemons/normal.svg",
+    "/IconsPokemons/poison.svg",
+    "/IconsPokemons/psychic.svg",
+    "/IconsPokemons/rock.svg",
+    "/IconsPokemons/steel.svg",
+    "/IconsPokemons/water.svg",
+    "/IconsPokemons/pokeball.svg",
+    "/IconsPokemons/pokeball.svg"
+  ]
+  
+    export const logos = [{
+      normal: 'rgb(145, 154, 162)',
+      fire: 'rgb(255, 157, 85)',
+      water: 'rgb(80, 144, 210)',
+      electric: 'rgb(244, 210, 60)',
+      grass: 'rgb(99, 188, 90)',
+      ice: 'rgb(115, 206, 192)',
+      fighting: 'rgb(206, 65, 107)',
+      poison: 'rgb(181, 103, 206 )',
+      ground: 'rgb(217, 120, 69)',
+      flying: 'rgb(137, 170, 227)',
+      psychic: 'rgb(250, 113, 121)',
+      bug: 'rgb(145, 193, 47)',
+      rock: 'rgb(197, 183, 140)',
+      ghost: 'rgb(82, 105, 173)',
+      dragon: 'rgb(11, 109, 195)',
+      dark: 'rgb(90, 84, 101)',
+      steel: 'rgb(90, 142, 162)',
+      fairy: 'rgb(236, 143, 230)',
+      unknown: 'rgb(0, 0, 0)',
+      shadow: 'rgb(0, 0, 0)',
+    }]
+    
