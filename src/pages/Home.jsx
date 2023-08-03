@@ -6,10 +6,10 @@ import Autocomplete from "@mui/material/Autocomplete"
 import PokemonList from "../components/PokemonList"
 import { fetchData } from "../FetchData"
 import LogOut from "../components/LogOut"
-import colors from "../Colors"
-import { Link } from "react-router-dom"
 import Pagination from "@mui/material/Pagination"
 import { useNavigate } from "react-router-dom"
+import PokemonCard from "../components/PokemonCard"
+import Loader from "../components/Loader"
 
 const Home = () => {
   //*URL
@@ -24,6 +24,7 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1) //Pagina a mostrar
   const inputValueRef = useRef(undefined) //Valor de la busqueda (UseRef para que no se renderize el componente con cada cambio)
   const navigate = useNavigate() //redireccionar para el buscardor por nombre
+  const [showLoader, setShowLoader] = useState(true) //Loader
   //*Username
   const userName = useSelector((state) => state.userName) //Username a saludar
   const savedUser = JSON.parse(localStorage.getItem("user")).userName //Hacer la peticion al local storage para saludar con ese nombre
@@ -48,6 +49,7 @@ const Home = () => {
     //Async & Await que trae los datos de los pokemones (con imagenes) (Async & Await para que no se dupliquen)
     setInicialPokemons([])
     fetchData(inicialInfo, setInicialPokemons)
+    setShowLoader(!Loader)
   }, [inicialInfo])
 
   const lastIndex = currentPage * pokemonsLimit
@@ -57,55 +59,7 @@ const Home = () => {
   let pokemonsToShow
   if (pokemonTypeSelected === null) {
     pokemonsToShow = inicialPokemons.slice(firstIndex, lastIndex).map((e) => {
-      const types = e.types.map((e) => e.type.name)
-      const bst = e.stats.reduce((acc, stat) => {
-        return acc + stat.base_stat
-      }, 0)
-      const color = colors[types[0]]
-
-      return (
-        <Link to={`/pokemon/${e.name}`} key={e.id}>
-          <li
-            style={{ background: color }}
-            className="pokemon__card"
-            key={e.id}
-          >
-            <div className="pokemon__card--container">
-              <h3 className="pokemon__card--name">{e.name}</h3>
-              <div>
-                <div className="pokemon__card--stats">
-                  <p>{bst}</p>
-                </div>
-              </div>
-              <div className="pokemon__card--typesContainer">
-                {types.map((e) => (
-                  <span
-                    style={{ background: colors[e] }}
-                    className="pokemon__card--types"
-                    key={e}
-                  >
-                    {e}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div className="pokemon__card--shadow">
-              <img
-                src={`/IconsPokemons/${types[0]}.svg`}
-                alt="Silueta"
-                className="pokemon__card--img2"
-              />
-            </div>
-            <div>
-              <img
-                className="pokemon__card--img"
-                src={e.sprites.other.dream_world.front_default}
-                alt={e.name}
-              />
-            </div>
-          </li>
-        </Link>
-      )
+      return <PokemonCard key={e.id} e={e} />
     })
   }
   const types = pokemonType.results?.map((e) => e.name) //Tipos de pokemones
@@ -141,61 +95,69 @@ const Home = () => {
         Bienvenid@ {userName || savedUser}, aqui puedes encontrar +1000{" "}
         <b>Pokemons</b> para ti!
       </h2>
-      <div className="home__filters">
-        <div className="inputGroup">
-          <form onSubmit={handleSubmit} className="flex gap-4">
-            <input type="text" onChange={handleChange2} />
-            <button type="submit">Buscar</button>
-            <label htmlFor="name">Busca tu pokemon aqui</label>
-          </form>
-        </div>
-        <div className="home__filters--container">
-          <div>
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={options || []}
-              disableClearable
-              sx={{ width: 300 }}
-              renderInput={(params) => (
-                <TextField {...params} label="Pokemones por pagina" />
-              )}
-              onChange={(e, value) => setPokemonsLimit(value)}
-            />
+      {showLoader ? <Loader />
+       : (
+        <>
+          <div className="home__filters">
+            <div className="inputGroup">
+              <form onSubmit={handleSubmit} className="flex gap-4">
+                <input type="text" onChange={handleChange2} />
+                <button type="submit">Buscar</button>
+                <label htmlFor="name">Busca tu pokemon aqui</label>
+              </form>
+            </div>
+            <div className="home__filters--container">
+              <div>
+                <Autocomplete
+                  disablePortal
+                  id="combo-box-demo"
+                  options={options || []}
+                  disableClearable
+                  sx={{ width: 300 }}
+                  renderInput={(params) => (
+                    <TextField {...params} label="Pokemones por pagina" />
+                  )}
+                  onChange={(e, value) => setPokemonsLimit(value)}
+                />
+              </div>
+              <div>
+                <Autocomplete
+                  disablePortal
+                  id="combo-box-demo"
+                  options={types || []}
+                  sx={{ width: 300 }}
+                  renderInput={(params) => (
+                    <TextField {...params} label="Tipos de pokemones" />
+                  )}
+                  onChange={(e, value) => setPokemonTypeSelected(value)}
+                />
+              </div>
+            </div>
           </div>
-          <div>
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={types || []}
-              sx={{ width: 300 }}
-              renderInput={(params) => (
-                <TextField {...params} label="Tipos de pokemones" />
-              )}
-              onChange={(e, value) => setPokemonTypeSelected(value)}
+          <div className="home__container">
+            <PokemonList
+              pokemonsLimit={pokemonsLimit}
+              pokemonType={pokemonType}
+              pokemonTypeSelected={pokemonTypeSelected}
+              lastIndex={lastIndex}
+              firstIndex={firstIndex}
             />
+
+            <ul className="pokemon__list">{pokemonsToShow}</ul>
           </div>
-        </div>
-      </div>
-      <div className="home__container">
-        <PokemonList
-          pokemonsLimit={pokemonsLimit}
-          pokemonType={pokemonType}
-          pokemonTypeSelected={pokemonTypeSelected}
-        />
-        <ul className="pokemon__list">{pokemonsToShow}</ul>
-      </div>
-      <div className="flex justify-center">
-        {pokemonsToShow && (
-          <div className="pagination">
-            <Pagination
-              onChange={handleChange}
-              count={totalPages}
-              defaultPage={1}
-            />
+          <div className="flex justify-center">
+            {pokemonsToShow && (
+              <div className="pagination">
+                <Pagination
+                  onChange={handleChange}
+                  count={totalPages}
+                  defaultPage={1}
+                />
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        </>
+      )}
     </main>
   )
 }

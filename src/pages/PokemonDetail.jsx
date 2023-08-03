@@ -141,7 +141,7 @@ function PokemonDetail() {
         <h4>{pokemon.name}</h4>
         <img
           className="evolution__img"
-          src={pokemon.sprites?.other.dream_world.front_default}
+          src={pokemon.sprites?.front_default}
           alt={pokemon.name}
         />
       </div>
