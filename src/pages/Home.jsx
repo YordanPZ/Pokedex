@@ -72,7 +72,7 @@ const Home = () => {
   }
   const handleSubmit = (event) => {
     event.preventDefault()
-    const inputValue = inputValueRef.current
+    const inputValue = inputValueRef.current.toLowerCase()
     if (inputValue) {
       setShowLoader(true)
       const urlPokemon = `https://pokeapi.co/api/v2/pokemon/${inputValue}`
