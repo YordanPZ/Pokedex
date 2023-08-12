@@ -4,7 +4,7 @@ function Nav() {
   const navigate = useNavigate()
   const userName = useSelector((state) => state.userName)
   const handleNavigate = () => {
-    if (userName.length !== 0) {
+    if (userName?.length !== 0) {
       navigate("/home")
     }
   }

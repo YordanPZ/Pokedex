@@ -1,29 +1,33 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { setUsername } from "../store/slices/userName.slice"
 import "./Intro.css"
 
 const Intro = () => {
-  const navigate = useNavigate() 
+  const navigate = useNavigate()
   const userName = useSelector((state) => state.userName)
   const dispatch = useDispatch()
   const [input, setInput] = useState("")
-  const savedUser = JSON.parse(localStorage.getItem("user"))?.userName //peticion por si hay usuaruio guardado
-
-  if (savedUser?.length > 1) {
-    //si hay usuario que me redirija
-    navigate("/home")
-  }
+  const savedUser = JSON.parse(localStorage.getItem("user"))?.userName
 
   const handleInput = () => {
-    
-    dispatch(setUsername(input))//Guardar en el estado global el nombre de usuario
-    const user = JSON.stringify({ userName: input }) //crear un objeto con el nombre de usuario
-    localStorage.setItem("user", user) // mandar al localstorage el objeto con el nombre de usuario
+    dispatch(setUsername(input))
+    const user = JSON.stringify({ userName: input })
+    localStorage.setItem("user", user)
   }
 
-  if (userName) navigate("/home") //si hay un nombre de usuario que me redirija a la pagina home
+  useEffect(() => {
+    // Redirigir al usuario si ya hay un nombre de usuario o si se encuentra uno en el local storage
+    if (userName || savedUser) {
+      navigate("/home")
+    }
+  }, [userName, savedUser, navigate])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    handleInput()
+  }
 
   return (
     <>
@@ -52,7 +56,7 @@ const Intro = () => {
             <b>Find</b> all your favorite <b>Pokemons</b>
           </p>
           <div className="container">
-            <form onSubmit={handleInput}>
+            <form onSubmit={handleSubmit}>
               <div className="search-container">
                 <input
                   placeholder="Username"
@@ -63,7 +67,6 @@ const Intro = () => {
                 />
                 <button type="submit" className="not">
                   <img
-                    onClick={handleInput}
                     src="/Pokeball.svg"
                     alt="pokeball"
                     className="search__icon"

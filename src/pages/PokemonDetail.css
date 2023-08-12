@@ -157,6 +157,7 @@
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
+        text-align: center;
     }
     .main__container__img__bg{
         height: 100px !important;
