@@ -84,6 +84,7 @@
 }
 .main__container__abilities{
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
 }
 .main__container__stats__color{
