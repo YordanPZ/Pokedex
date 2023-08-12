@@ -34,6 +34,7 @@
 }
 .section__intro-title {
     font-size: 5rem;
+    text-align: center;
 }
 .container {
     position: relative;
@@ -145,4 +146,68 @@
     height: 10rem;
     z-index: 1;
 }
-
+@media (width<=1200px){
+    .main__logos-pikachu{
+        height: 25rem;
+    }
+    .main__logos-pokeball{
+        height: 15rem;
+    }
+    .main__logos-cloud{
+        height: 8rem;
+    }
+    .main__logos-cloud2{
+        height: 5rem;
+    }
+    .main__logos-pokeball1{
+        height: 5rem;
+    }
+}
+@media (width<=800px){
+    .main__logos-pikachu{
+        height: 20rem;
+        margin: 27% 35% auto auto;
+    }
+    .main__logos-pokeball{
+        height: 10rem;
+        right: 7%;
+        top: 30%;
+    }
+    .main__logos-cloud{
+        height: 4rem;
+    }
+    .main__logos-cloud2{
+        height: 3rem;
+    }
+    .main__logos-pokeball1{
+        height: 3rem;
+    }
+    .section__intro-title {
+        font-size: 4rem;
+    }
+}
+@media (width<=500px){
+    .main__logos-pikachu{
+        height: 20rem;
+        margin: 27% 15% auto auto;
+    }
+    .main__logos-pokeball{
+        height: 10rem;
+        inset: 0;
+        margin: auto 10px auto auto;
+    }
+    .main__logos-cloud{
+        height: 4rem;
+        inset: 0;
+        margin: 100px auto auto auto;
+    }
+    .main__logos-cloud2{
+        visibility: hidden;
+    }
+    .main__logos-pokeball1{
+        visibility: hidden;
+    }
+    .section__intro-title {
+        font-size: 3rem;
+    }
+}

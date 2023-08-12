@@ -24,19 +24,21 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1) //Pagina a mostrar
   const inputValueRef = useRef(undefined) //Valor de la busqueda (UseRef para que no se renderize el componente con cada cambio)
   const navigate = useNavigate() //redireccionar para el buscardor por nombre
-  const [showLoader, setShowLoader] = useState(true) //Loader
+  const [showLoader, setShowLoader] = useState(false) //Loader
   //*Username
   const userName = useSelector((state) => state.userName) //Username a saludar
   const savedUser = JSON.parse(localStorage.getItem("user")).userName //Hacer la peticion al local storage para saludar con ese nombre
 
   useEffect(() => {
     //Axios que trae los datos de los pokemones (sin imagenes)
+    setShowLoader(true)
     axios
       .get(urlInicialPokemons)
       .then((res) => {
         setInicialInfo(res.data)
       })
       .catch((err) => console.log(err))
+      .finally(() => setShowLoader(false))
 
     //Axios que trae los tipos de los pokemones
     axios
@@ -48,8 +50,7 @@ const Home = () => {
   useEffect(() => {
     //Async & Await que trae los datos de los pokemones (con imagenes) (Async & Await para que no se dupliquen)
     setInicialPokemons([])
-    fetchData(inicialInfo, setInicialPokemons)
-    setShowLoader(!Loader)
+    fetchData(inicialInfo, setInicialPokemons, setShowLoader)
   }, [inicialInfo])
 
   const lastIndex = currentPage * pokemonsLimit
@@ -73,6 +74,7 @@ const Home = () => {
     event.preventDefault()
     const inputValue = inputValueRef.current
     if (inputValue) {
+      setShowLoader(true)
       const urlPokemon = `https://pokeapi.co/api/v2/pokemon/${inputValue}`
 
       axios
@@ -81,6 +83,7 @@ const Home = () => {
         .catch(() => {
           navigate("/notfound")
         })
+        .finally(() => setShowLoader(false))
     }
   }
 
@@ -91,12 +94,13 @@ const Home = () => {
   return (
     <main className="home">
       <LogOut />
-      <h2 className="home__title">
-        Bienvenid@ {userName || savedUser}, aqui puedes encontrar +1000{" "}
-        <b>Pokemons</b> para ti!
-      </h2>
-      {showLoader ? <Loader />
-       : (
+      <h1 className="home__title">
+        Bienvenid@ <strong>{userName || savedUser}</strong>, aqui puedes
+        encontrar +1000 <b>Pokemons</b> para ti!
+      </h1>
+      {showLoader ? (
+        <Loader />
+      ) : (
         <>
           <div className="home__filters">
             <div className="inputGroup">
@@ -145,7 +149,7 @@ const Home = () => {
 
             <ul className="pokemon__list">{pokemonsToShow}</ul>
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-center w-full">
             {pokemonsToShow && (
               <div className="pagination">
                 <Pagination

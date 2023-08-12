@@ -10,7 +10,7 @@ function PokemonCard({ e }) {
   const official = e.sprites.other["official-artwork"].front_default //BackUp para las imagenes
   return (
     <Link to={`/pokemon/${e?.name}`} key={e?.id}>
-      <li style={{ background: color }} className="pokemon__card" key={e?.id}>
+      <li style={{ background: color }} className="pokemon__card relative" key={e?.id}>
         <div className="pokemon__card--container">
           <h3 className="pokemon__card--name">{e?.name}</h3>
           <div>

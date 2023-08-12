@@ -6,7 +6,7 @@ import Loader from "./Loader"
 
 const PokemonList = ({ pokemonTypeSelected, pokemonType, pokemonsLimit }) => {
   const [pokemonList, setPokemonList] = useState([])
-  const [showLoader, setShowLoader] = useState(true) //Loader
+  const [showLoader, setShowLoader] = useState(false) //Loader
   const typeUrl = pokemonType?.results?.find(
     (type) => type.name === pokemonTypeSelected
   )?.url
@@ -15,7 +15,6 @@ const PokemonList = ({ pokemonTypeSelected, pokemonType, pokemonsLimit }) => {
   useEffect(() => {
     if (pokemonTypeSelected !== "null" && typeUrl) {
       setShowLoader(true)
-      setPokemonList([])
 
       axios
         .get(typeUrl)
@@ -23,12 +22,12 @@ const PokemonList = ({ pokemonTypeSelected, pokemonType, pokemonsLimit }) => {
           getPokemonsIndividualData(res.data.pokemon)
         })
         .catch((err) => console.log(err))
+        .finally(() => setShowLoader(false))
     }
   }, [pokemonTypeSelected, typeUrl])
 
   const getPokemonsIndividualData = (arrayPokemon) => {
     const fetchData = async () => {
-      setPokemonList([])
 
       try {
         const fetchDataForPokemon = async (data) => {
@@ -41,6 +40,8 @@ const PokemonList = ({ pokemonTypeSelected, pokemonType, pokemonsLimit }) => {
         setPokemonList(newPokemonsData)
       } catch (err) {
         console.log(err)
+      } finally {
+        setShowLoader(false)
       }
     }
     fetchData()

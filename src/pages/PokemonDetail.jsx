@@ -6,29 +6,35 @@ import axios from "axios"
 import colors from "../Colors"
 import { Card, Metric, Text, Flex, ProgressBar, Grid } from "@tremor/react"
 import { useNavigate } from "react-router-dom"
+import Loader from "../components/Loader"
+import { rutas, logos } from "../Colors"
 
 function PokemonDetail() {
   const { name } = useParams()
-  const urlPokemon = `https://pokeapi.co/api/v2/pokemon/${name}`
-  const [pokemonInfo, setPokemonInfo] = useState([])
-  const [evolutionUrl, setEvolutionUrl] = useState([])
-  const [evolutions, setEvolutions] = useState([])
   const navigate = useNavigate()
-
-  const urlEvolucion = pokemonInfo.species?.url
-
+  const [showLoader, setShowLoader] = useState(false) //Loader
+  const [pokemonInfo, setPokemonInfo] = useState([])
   useEffect(() => {
     //Recupera toda la info del pokemon seleccionado
+    setShowLoader(true)
+
     axios
-      .get(urlPokemon)
+      .get(`https://pokeapi.co/api/v2/pokemon/${name}`)
       .then((res) => setPokemonInfo(res.data))
       .catch(() => {
         navigate("/notfound")
       })
-  }, [urlPokemon])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [name])
+
+  const [evolutionUrl, setEvolutionUrl] = useState([])
+  const [evolutions, setEvolutions] = useState([])
+
+  const urlEvolucion = pokemonInfo.species?.url
 
   useEffect(() => {
     //Recupero la url de donde sacar las evoluciones del pokemon
+    setShowLoader(true)
     if (pokemonInfo.id) {
       axios
         .get(urlEvolucion)
@@ -81,6 +87,8 @@ function PokemonDetail() {
         setEvolutions(info) //asigno la info de las evoluciones
       } catch (error) {
         console.error(error)
+      } finally {
+        setShowLoader(false)
       }
     }
 
@@ -103,6 +111,10 @@ function PokemonDetail() {
       </p>
     )
   })
+  console.log(pokemonInfo.types?.[0].type.name)
+  const bgImage = rutas.find((ruta) =>
+    ruta.includes(pokemonInfo.types?.[0].type.name)
+  )
 
   const stats = [
     {
@@ -147,13 +159,16 @@ function PokemonDetail() {
       </div>
     )
   })
+  const colorTipo = logos[0][pokemonInfo.types?.[0].type.name]
+  console.log(colorTipo)
 
   return (
     <main className="main">
+      {showLoader ? <Loader /> : false}
       <Link className="redirect" clas to={"/home"}>
         <img src="/home.png" alt="" />
       </Link>
-      <h1 className="title flex items-center justify-between">
+      <h1 className="title flex items-center justify-between flex-wrap">
         {pokemonInfo.name}{" "}
         <button
           onClick={() => navigate(-1)}
@@ -164,7 +179,21 @@ function PokemonDetail() {
       </h1>
       <hr className="border-black" />
       <div className="main__container">
-        <div className="main__container__img">
+        <div
+          style={{
+            position: "relative"
+          }}
+          className="main__container__img"
+        >
+          <img
+            className="main__container__img__bg"
+            src={bgImage}
+            alt={pokemonInfo.name}
+            style={{
+              filter: `drop-shadow(0px 0px 30px ${colorTipo})`,
+              height: 1000
+            }}
+          />
           <img
             src={
               pokemonInfo.sprites?.other.dream_world.front_default || official
@@ -201,9 +230,9 @@ function PokemonDetail() {
               ))}
             </div>
           </div>
-          <div>
+          <div className="main__container--stats">
             <h4>Inicial Stats</h4>
-            <Grid numItemsSm={1} numItemsLg={2} className="gap-6">
+            <Grid className="gap-6 flex flex-wrap items-center justify-center m-2">
               {stats.map((stats, index) => {
                 return (
                   <Card key={index} className="p-2 w-40 drop">

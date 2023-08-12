@@ -74,6 +74,13 @@
     top: 20%;
     overflow: hidden;
   }
+  .container__loader{
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    z-index: 200;
+    backdrop-filter: blur(10px);
+  }
   
   .hands {
     margin-top: 140px;
