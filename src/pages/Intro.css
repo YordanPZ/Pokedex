@@ -193,8 +193,7 @@
     }
     .main__logos-pokeball{
         height: 10rem;
-        inset: 0;
-        margin: auto 10px auto auto;
+        visibility: hidden;
     }
     .main__logos-cloud{
         height: 4rem;
